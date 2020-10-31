@@ -8,7 +8,7 @@ module.exports = {
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
   },
-  pathPrefix: "/my-blog",
+  //pathPrefix: "/my-blog",
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
