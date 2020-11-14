@@ -7,7 +7,6 @@ date: "2020-10-31"
 イベントソーシングは、イベントを中心に据えてビジネスロジックを実装し、アグリゲートを永続化する手法。
 アグリゲートは、一連のイベントでデータベースに格納される。
 個々のイベントはアグリゲートの状態変更を表す。
-
 アグリゲートのビジネスロジックは、これらのイベントを生成、消費するための要件を中心として構成されます。
 この仕組みの説明
 
@@ -71,7 +70,7 @@ ORMフレームワークは、1つ以上のSELECT文を実行してオブジェ�
 このメソッドは一般的にコマンドが実行不能な時に例外を投げる
 
 
-イベントソーシングベースのOrderアグリゲート
+・イベントソーシングベースのOrderアグリゲート
 イベントソーシングバージョンのOrderアグリゲートは、イベントを生成します。
 ビジネスロジックがイベントを生成するコマンドとそれらのイベントを適用して状態を更新するコードによって実装されている
 
@@ -84,4 +83,26 @@ Orderアグリゲートを修正するprocess、apply()メソッド
 各メソッドは1個のprocessメソッドと1個以上のapply()メソッドに置き換えられる。
 reviseOrderメソッドはprocess(ReviseOrder)とapply(OrderRevisionProposed)、confirmRevision()メソッドはprocessとapplyに置き換えられています。
 
+public class Order { 
+ private OrderState state;
+ private Long consumerId;
+ private Long restaurantId;
+ private OrderLineItems orderLineItems;
+ private DeliveryINfomation deliveryInformation;
+ private PaymentInformation paymentInformation;
+ private Money orderMinumum;
 
+ public Order(){}
+
+ public List<Event> process(CreateOrderCommand command) {
+ 	return events(new OrderCreatedEvent(command.getOrderDetails()));
+ }
+
+ public void apply(OrderCreatedEvent event){
+   OrderDetails orderDetails = event.getOrderDetails();
+   this.orderLineItems = new OrderLineItems(orderDetails.getLineItems());
+   this.orderMinumum = orderDetails.getOrderMinimum();
+   this.state = APPROVAL_PENDING;
+ }
+
+}
