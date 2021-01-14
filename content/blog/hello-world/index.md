@@ -1,231 +1,131 @@
 ---
-title: Hello World
+title: 初回の投稿
 date: "2020-10-11"
-description: "Hello World"
+description: "最初の記事"
 ---
 
-This is my first post on my new fake blog! How exciting!
+## 実践クリーンアーキテクチャ
 
-I'm sure I'll write a lot more interesting things in the future.
+https://qiita.com/nrslib/items/aa49d10dd2bcb3110f22
 
-Oh, and here's a great quote from this Wikipedia on
-[salted duck eggs](https://en.wikipedia.org/wiki/Salted_duck_egg).
+## 参考記事
+https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
-> A salted duck egg is a Chinese preserved food product made by soaking duck
-> eggs in brine, or packing each egg in damp, salted charcoal. In Asian
-> supermarkets, these eggs are sometimes sold covered in a thick layer of salted
-> charcoal paste. The eggs may also be sold with the salted paste removed,
-> wrapped in plastic, and vacuum packed. From the salt curing process, the
-> salted duck eggs have a briny aroma, a gelatin-like egg white and a
-> firm-textured, round yolk that is bright orange-red in color.
+## ADOP
+ADOP (Application Domain Others Pattern) は中長期的に運用可能なコードへ誘導するアプリケーションアーキテクチャパターンです。
 
-![Chinese Salty Egg](./salty_egg.jpg)
+ADOP は次の特徴があります。
 
-You can also write code blocks here!
+最小限のルールである
+指針が明確である
+特定の技術スタックに縛られない
+テスタビリティが確保される
+これらの特徴は、コードを自然と中長期的に運用可能なコードへ導きます。
+まず、簡単にそれぞれがどういった意味を成すのかを確認してきましょう。
 
-```js
-const saltyDuckEgg = "chinese preserved food product"
-```
+最小限のルールである
+どれほど完璧な作戦であっても、その実行が不可能であれば何の意味もありません。
+プログラミングにおいてもそれは同じことで、制約を守るために多大なる労力を求められるようであれば、いつしか制約が守られなくなってしまいます。
 
-| Number | Title                                    | Year |
-| :----- | :--------------------------------------- | ---: |
-| 1      | Harry Potter and the Philosopher’s Stone | 2001 |
-| 2      | Harry Potter and the Chamber of Secrets  | 2002 |
-| 3      | Harry Potter and the Prisoner of Azkaban | 2004 |
+ADOP は無理なく作戦を実行するために、ルールは最小限になっています。
+ADOP で課されるルールはたったの２つです。
 
-[View raw (TEST.md)](https://raw.github.com/adamschwartz/github-markdown-kitchen-sink/master/README.md)
+オブジェクトが３つのレイヤーのうち、どれにあたるかを考え、配置すること
+上位レイヤーのオブジェクトが下位レイヤーのオブジェクトを取り扱うときには汎化すること
+　
+ルール１は難しく思えるかもしれませんが、その基準はとても単純で明快なものです。
+たった２つの質問に答えるだけで、どのレイヤーにあたるかは導かれます。
 
-This is a paragraph.
+ルール２に関しては抽象型（インターフェースや純粋仮想関数で構成された仮想クラス）の概念さえ分かれば取り扱えるものです。
+抽象型を扱ったコードは OOP の基礎的なテクニックであるので、数度コードを記述して実行し、処理の流れを追えば体得できるものです。
 
-    This is a paragraph.
+指針が明確である
+アーキテクチャはそのコンセプトを主張するものであることが多く、ある程度の指針を明示しつつも、具体的なディレクトリ構成やコード内容に関しては受け取り手次第であることが多いです。
+ADOP はディレクトリ構造とコーディングに関する指針が明示的です。
 
-# Header 1
+ADOP は３つのレイヤーにしたがってディレクトリを分割することを推奨します。
+ADOP は３つのレイヤーの依存関係に言及し、汎化を利用すべき箇所を明示します。
 
-## Header 2
+これらの指針が明確であるために、開発者はディレクトリ構造や依存関係の整理方法などの本質的でない問題について悩む必要がなくなります。
+また、開発者に強い自制心や深い理解を求める必要もありません。
+開発者に唯一求められることは ADOP の打ち立てる２つの指針の理解と実践のみです。
 
-    Header 1
-    ========
+特定の技術スタックに縛られない
+伝統的なソフトウェア開発において、上位レベルのオブジェクトは下位レベルのオブジェクトに依存するように開発されていました。
+言い換えるなら、ビジネスロジックがデータベースの操作に四苦八苦していたのです。
+そのため、データベースの入れ替えなどを起因に下位レベルのオブジェクトが変更されることになると、上位レベルのオブジェクトにまで修正が及んでいました。
 
-    Header 2
-    --------
+ソフトウェアの関心ごとはいつだって上位レベルのオブジェクトにあります。
+したがって、下位レベルのオブジェクトが変更に関する方針を左右するような主導権を有している状況はおかしいといわざるを得ません。
 
-# Header 1
+ADOP の指針に従うと、この問題は解決されます。
+上位レベルのオブジェクトも下位レベルのオブジェクトも、いずれも抽象に依存するようになるため、依存関係逆転の原則が達成されます。
+ビジネスロジックは特定の技術スタックと疎になるため、様々な（たとえば政治的な）理由から生じる技術スタックの変更に怯えることがなくなります。
 
-## Header 2
+テスタビリティが確保される
+テスト駆動開発の台頭により、いまやユニットテストは欠かせないものです。
+特に中長期的な運用を目指したコードであればあるほど、その必要性は高まります。
 
-### Header 3
+その一方で、ユニットテスト可能なオブジェクトを開発するには一定のコーディング技術が必要です。
+チームが成熟していれば問題ありませんが、たとえばビギナーがチームに参画した際にそれをいきなり求めるのは難しいでしょう。
 
-#### Header 4
+ADOP はこの問題を解決します。
+ADOP が求める指針はテスタビリティの確保を強力に支援します。
 
-##### Header 5
+ADOP の指針
+ADOP は次の図で説明されます。
 
-###### Header 6
 
-    # Header 1
-    ## Header 2
-    ### Header 3
-    #### Header 4
-    ##### Header 5
-    ###### Header 6
 
-# Header 1
+この図を見て、レイヤードアーキテクチャを想起したのであれば、それは正しい感覚です。
+ADOP はレイヤードアーキテクチャをベースに一歩推し進めたものです。
 
-## Header 2
+図を前提に解説していきましょう。
+ADOP は三つの層から構成されます。
+　
 
-### Header 3
+アプリケーションレイヤー（Application Layer ）
+ドメインレイヤー（Domain Layer）
+アザーズレイヤー（Others Layer）
+図の右側に存在する矢印は UML の依存（黒矢印）と汎化（白抜き矢印）を示しています。
+つまり、アプリケーションレイヤーやドメインレイヤーのオブジェクトはそれ以外から利用されます。
+反対にアプリケーションレイヤーやドメインレイヤーに存在しないオブジェクトを、アプリケーションレイヤーやドメインレイヤーで利用したい場合は汎化して利用します。
 
-#### Header 4
+レイヤー
+レイヤーの概要を確認します。
+詳しいコードはこの後に続きますので、理解できなかった場合には、互いに次からの説明と具体的なコードを行き来するとよいでしょう。
 
-##### Header 5
+ドメインレイヤー（Domain Layer）
+ドメインとは関心ごとの意味で、つまりソフトウェアを適用しようとする対象領域のことをいいます。
+したがって、このレイヤーに配置されるのはビジネスルールをカプセル化したオブジェクトです（ドメイン駆動設計の文脈でドメインオブジェクトと呼ばれるものです。）。
 
-###### Header 6
+なお、ドメインオブジェクトを技術的な詳細から守り、ドメインに集中させるためのファクトリやリポジトリのインターフェースなどのオブジェクトも、便宜上このレイヤーに配置します。
+ただし、これはそれらをアプリケーションレイヤーに配置する可能性を奪うものではありません。
 
-    # Header 1 #
-    ## Header 2 ##
-    ### Header 3 ###
-    #### Header 4 ####
-    ##### Header 5 #####
-    ###### Header 6 ######
-
-> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-
-    > Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-
-> ## This is a header.
->
-> 1. This is the first list item.
-> 2. This is the second list item.
->
-> Here's some example code:
->
->     Markdown.generate();
-
-    > ## This is a header.
-    > 1. This is the first list item.
-    > 2. This is the second list item.
-    >
-    > Here's some example code:
-    >
-    >     Markdown.generate();
-
-- Red
-- Green
-- Blue
-
-* Red
-* Green
-* Blue
-
-- Red
-- Green
-- Blue
-
-```markdown
-- Red
-- Green
-- Blue
-
-* Red
-* Green
-* Blue
-
-- Red
-- Green
-- Blue
-```
-
-- `code goes` here in this line
-- **bold** goes here
-
-```markdown
-- `code goes` here in this line
-- **bold** goes here
-```
-
-1. Buy flour and salt
-1. Mix together with water
-1. Bake
-
-```markdown
-1. Buy flour and salt
-1. Mix together with water
-1. Bake
-```
-
-1. `code goes` here in this line
-1. **bold** goes here
-
-```markdown
-1. `code goes` here in this line
-1. **bold** goes here
-```
-
-Paragraph:
-
-    Code
-
-<!-- -->
-
-    Paragraph:
-
-        Code
-
----
-
----
-
----
-
----
-
----
-
-    * * *
-
-    ***
-
-    *****
-
-    - - -
-
-    ---------------------------------------
-
-This is [an example](http://example.com "Example") link.
-
-[This link](http://example.com) has no title attr.
-
-This is [an example][id] reference-style link.
-
-[id]: http://example.com "Optional Title"
-
-    This is [an example](http://example.com "Example") link.
-
-    [This link](http://example.com) has no title attr.
-
-    This is [an example] [id] reference-style link.
-
-    [id]: http://example.com "Optional Title"
-
-_single asterisks_
-
-_single underscores_
-
-**double asterisks**
-
-**double underscores**
-
-    *single asterisks*
-
-    _single underscores_
-
-    **double asterisks**
-
-    __double underscores__
-
-This paragraph has some `code` in it.
-
-    This paragraph has some `code` in it.
-
-![Alt Text](https://placehold.it/200x50 "Image Title")
-
-    ![Alt Text](https://placehold.it/200x50 "Image Title")
+アプリケーションレイヤー（Application Layer ）
+ドメインレイヤーのオブジェクトはドメインの知識をコードで体現するものに過ぎないため、それらをまとめ上げて、ソフトウェアで成し遂げたいことを達成するオブジェクトが必要です。
+アプリケーションレイヤーのオブジェクトはドメインレイヤーのオブジェクトを利活用し、ソフトウェアが解決したいことを達成するよう導きます。
+これらはアプリケーションサービスと銘打たれ、この層に配置されます。
+
+オブジェクトかメソッドかの違いはあるでしょうが、ユースケースと言い換えても差し支えないでしょう。
+
+アザーズレイヤー（Others Layer）
+ADOP において重要なのは、アプリケーションレイヤーとドメインレイヤーに、それ以外のコードが紛れ込まないようにすることです。
+したがって、アプリケーションレイヤーやドメインレイヤー以外のすべてをその他として、アザーズレイヤーのオブジェクトとします。
+
+アザーズレイヤーはたとえば MVC フレームワークといったユーザーインターフェースを完全に内包します。
+またデータベースを操作するコードや O/R Mapper を使ったコードもアザーズレイヤーに含まれます。
+これらの技術スタックをアザーズレイヤーに適切に封じ込めることで、技術スタックの変更に柔軟に対応できるようになります。
+
+アザーズレイヤーはすべてをひとところで管理するものではなく、技術スタックによって分割管理します。
+図の Others に背景色がなく、User Interface や Infrastructure に背景色があるのはそのためです。
+
+ディレクトリ構成
+ADOP ではレイヤーごとにディレクトリを分けることは強く推奨します。
+なぜなら、ディレクトリを分け、そこに配置するオブジェクトを理解することで、自然と ADOP の達成したいことにたどり着けるからです。
+ADOP ではディレクトリをアプリケーションレイヤー、ドメインレイヤー、そして特定の技術領域ごと分けることを推奨します。
+なお、あくまでも分けることを推奨するのであり、ディレクトリ構造自体は一定のルールを守っている限り柔軟です。
+
+次に典型的なディレクトリ構造をいくつか例示します。
+これらの例は絶対的なものではありません。
+重要なことは例に従うことではなく、アプリケーションレイヤーとドメインレイヤーとその他を分割し、アプリケーションレイヤーやドメインレイヤーを次の技術スタックに載せ替えられるようにすることです。
