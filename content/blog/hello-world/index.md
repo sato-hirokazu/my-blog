@@ -1,7 +1,7 @@
 ---
-title: 初回の投稿
+title: laravelの実践クリーンアーキテクチャ
 date: "2020-10-11"
-description: "最初の記事"
+description: "clean architecture"
 ---
 
 ## 実践クリーンアーキテクチャ
