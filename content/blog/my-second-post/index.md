@@ -1,13 +1,16 @@
 ---
-title: My Second Post!
+title: Founder/Customer Fitをめざそう
 date: "2020-10-12"
 ---
 
-Wow! I love blogging so much already.
 
-Did you know that "despite its name, salted duck eggs can also be made from
-chicken eggs, though the taste and texture will be somewhat different, and the
-egg yolk will be less rich."?
-([Wikipedia Link](https://en.wikipedia.org/wiki/Salted_duck_egg))
+誰の課題を解決するのか
+どんな課題を解決するのか
+どう解決するのか
+どう提供するのか
 
-Yeah, I didn't either.
+たとえば、ありがちな例として「こういうプロダクトをつくりたい」という話があります。このアイデアの切り口は、3の『どう解決するのか』から入ってしまっています。つまり、このプロダクトはどんな課題を解決するのか、そもそもその課題を抱えている顧客が本当に存在しているのかがわかりません。
+
+失敗しないプロダクトをつくるためには、顧客や課題、解決策をひとつひとつ検証しながら前に進む必要があるのです。
+
+
